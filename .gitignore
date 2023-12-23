@@ -1,0 +1,6 @@
+.Ds_Store
+*.Ds_Store
+AUTHORS
+*.zip
+/00/
+.idea*
