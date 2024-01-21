@@ -1,4 +1,3 @@
-
 public class Code {
     /**
      *Returns the binary code of the dest (3 bits as a String)
@@ -7,9 +6,9 @@ public class Code {
         if(dest == null)        return "000";
         if(dest.equals("M") )   return "001";
         if(dest.equals("D") )   return "010";
-        if(dest.equals("DM") )  return "011";
+        if(dest.equals("DM") || dest.equals("MD"))  return "011";
         if(dest.equals("A") )   return "100";
-        if(dest.equals("AM") )  return "101";
+        if(dest.equals("AM") || dest.equals("MA"))  return "101";
         if(dest.equals("AD") )  return "110";
         if(dest.equals("ADM") ) return "111";
         return null;
@@ -54,5 +53,4 @@ public class Code {
         if(jump.equals("JMP") ) return "111";
         return null;
     }
-
 }

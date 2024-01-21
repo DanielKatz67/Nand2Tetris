@@ -1,4 +1,3 @@
-//package ...;
 import java.io.*;
 
 public class Parser {
@@ -35,7 +34,7 @@ public class Parser {
         currentLine = currentLine.trim();
 
         // If the line is a comment or empty, keep reading the next line
-        while (currentLine.isEmpty()) {
+        while (currentLine.isEmpty() || currentLine.charAt(0) == '/') {
             currentLine = bufferFile.readLine();
             if (currentLine == null) { // End of file reached
                 break;
@@ -119,5 +118,4 @@ public class Parser {
         // there is a jump part
         return currentLine.substring(posSecondSep+1);
     }
-
 }
