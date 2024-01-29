@@ -69,33 +69,32 @@ class CodeWriter:
         implements the given push or pop command
         """
         if c_type == 'C_PUSH':
-            if segment == 'pointer' and i == 0 : self._translatePush("THIS", i)
-            if segment == 'pointer' and i == 1 : self._translatePush("THAT", i)
-            if segment == 'constant'           : self._translatePush('constant', i)
-            if segment == 'static'             : self._translatePush(str(16+int(i)), i)
-            if segment == 'temp'               : self._translatePush("R5", str(int(i)+5))
-            if segment == 'local'              : self._translatePush('LCL', i)
-            if segment == 'argument'           : self._translatePush('ARG', i)
-            if segment == 'this'               : self._translatePush('THIS', i)
-            if segment == 'that'               : self._translatePush('THAT', i)
+            if segment == 'pointer' and i == 0 : self._translatePush("THIS", i, True)
+            if segment == 'pointer' and i == 1 : self._translatePush("THAT", i, True)
+            if segment == 'constant'           : self._translatePush('constant', i, False)
+            if segment == 'static'             : self._translatePush(str(16+int(i)), i, True)
+            if segment == 'temp'               : self._translatePush("R5", str(int(i)+5), False)
+            if segment == 'local'              : self._translatePush('LCL', i, False)
+            if segment == 'argument'           : self._translatePush('ARG', i, False)
+            if segment == 'this'               : self._translatePush('THIS', i, False)
+            if segment == 'that'               : self._translatePush('THAT', i, False)
         else:
-            if segment == 'pointer' and i == 0 : self._translatePop("THIS", i)
-            if segment == 'pointer' and i == 1 : self._translatePop("THAT", i)
-            if segment == 'static'             : self._translatePop(str(16+int(i)), i)
-            if segment == 'temp'               : self._translatePop("R5", str(int(i)+5))
-            if segment == 'local'              : self._translatePop('LCL', i)
-            if segment == 'argument'           : self._translatePop('ARG', i)
-            if segment == 'this'               : self._translatePop('THIS', i)
-            if segment == 'that'               : self._translatePop('THAT', i)
+            if segment == 'pointer' and i == 0 : self._translatePop("THIS", i, True)
+            if segment == 'pointer' and i == 1 : self._translatePop("THAT", i, True)
+            if segment == 'static'             : self._translatePop(str(16+int(i)), i, True)
+            if segment == 'temp'               : self._translatePop("R5", str(int(i)+5), False)
+            if segment == 'local'              : self._translatePop('LCL', i, False)
+            if segment == 'argument'           : self._translatePop('ARG', i, False)
+            if segment == 'this'               : self._translatePop('THIS', i, False)
+            if segment == 'that'               : self._translatePop('THAT', i, False)
 
-    def _translatePush(self, segment, i):
+    def _translatePush(self, segment, i, noRef):
         addition_not_for_direct = ''
-        if segment not in ['pointer','static']:
+        if not noRef :
             addition_not_for_direct = (
             f"   @{i}\n"
             f"   A=D+A\n"
             f"   D=M\n")
-
 
         suffix = (
         "   @SP\n"
@@ -119,9 +118,9 @@ class CodeWriter:
             f"//RAM[SP]=D\n"
             f"{suffix}")
 
-    def _translatePop(self, segment, i):
-        addition_not_for_direct = '   D=A'
-        if segment not in ['pointer','static']:
+    def _translatePop(self, segment, i, noRef):
+        addition_not_for_direct = '   D=A\n'
+        if not noRef :
             addition_not_for_direct = (
             f"   D=M\n"
             f"   @{i}\n"
@@ -158,8 +157,8 @@ class CodeWriter:
         """
         closes the output file
         """
-        self.file.write(
-        "(END)\n"
-        "   @END\n"
-        "   0;JMP\n")
+        # self.file.write(
+        # "(END)\n"
+        # "   @END\n"
+        # "   0;JMP\n")
         self.file.close()

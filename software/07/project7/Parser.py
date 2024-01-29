@@ -6,7 +6,7 @@ class Parser:
         Arguments: Input file path
         """
         self.file = open(input_file_path, 'r')
-        self.current_line = None
+        self.current_line = ''
 
     def hasMoreLines(self) -> bool:
         """

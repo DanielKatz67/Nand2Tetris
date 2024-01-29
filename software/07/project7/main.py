@@ -46,15 +46,18 @@ def translate_single_file_vm_to_asm(inputFile, writer):
             writer.writeArithmetic(arg1)
 
         if commandType in ['C_PUSH', 'C_POP']:
-            writer.writePushPop(commandType, arg1, arg2)
+            writer.writePushPop(commandType, arg1, int(arg2))
+
+
     parser.close()
 
 if __name__ == '__main__':
-    dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/07/MemoryAccess/PointerTest/PointerTest.vm'
-    # if len(sys.argv) != 2:
-    #     print("Usage: VMtranslator <directory path>")
-    #     sys.exit(1)
-    #
-    # dir_path = sys.argv[1]
+    # dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/07/MemoryAccess/PointerTest/PointerTest.vm'
+    # dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/07/MemoryAccess/PointerTest/testPointe.vm'
+    if len(sys.argv) != 2:
+        print("Usage: VMtranslator <directory path>")
+        sys.exit(1)
+
+    dir_path = sys.argv[1]
     main(dir_path)
 
