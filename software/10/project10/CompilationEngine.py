@@ -324,7 +324,7 @@ class CompilationEngine:
                 self.write(f"<symbol> {self.tokenizer.symbol} </symbol>")
 
             elif self.tokenizer.symbol == '(':
-                self.write(f"<symbol> {self.tokenizer.symbol} </symbol>")
+                # self.write(f"<symbol> {self.tokenizer.symbol} </symbol>")
                 self.write("<expressionList>")
                 self.compileExpressionList()
                 self.write("</expressionList>")

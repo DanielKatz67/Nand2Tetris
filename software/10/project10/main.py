@@ -24,11 +24,13 @@ def translate_single_file_jack_to_xml(jack_file):
 if __name__ == '__main__':
     # dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/10/ArrayTest/Main.jack'
     # dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/10/Square'
-    dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/10/ExpressionLessSquare'
+    # dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/10/ExpressionLessSquare'
+    # dir_path = '/Users/daniel/Desktop/Nand2Tetris/projects/software/10/Square/Square.jack'
+    # dir_path = '/Users/daniel/Desktop/10tests/tests'
 
-    # if len(sys.argv) != 2:
-    #     print("Usage: JackAnalyzer <directory path>")
-    #     sys.exit(1)
-    #
-    # dir_path = sys.argv[1]
+    if len(sys.argv) != 2:
+        print("Usage: JackAnalyzer <directory path>")
+        sys.exit(1)
+
+    dir_path = sys.argv[1]
     main(dir_path)
